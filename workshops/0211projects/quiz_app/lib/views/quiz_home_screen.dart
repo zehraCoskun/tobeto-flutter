@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/assets/colors/colors.dart';
 
 class QuizHomeScreen extends StatefulWidget {
   const QuizHomeScreen({super.key});
@@ -13,7 +14,7 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: turkuaz,
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -24,7 +25,7 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
             child: Text(
               textTitle,
               style: const TextStyle(
-                  color: Color.fromARGB(255, 251, 189, 8),
+                  color: siyah,
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/assets/colors/colors.dart';
 import 'package:quiz_app/data/quetions.dart';
-
+import 'package:quiz_app/views/result_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -13,7 +13,8 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int currentPage = 1;
   int currentQuestionIndex = 0;
-  int numberOfCorrextAnswer = 0;
+  int numberOfCorrectAnswer = 0;
+  List<int> wrongAnsweredQuestion = [];
 
   void updateQuestionAndPage() {
     setState(() {
@@ -21,7 +22,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
         currentQuestionIndex++;
         currentPage++;
       } else {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResultScreen(
+                    correctAnswers: numberOfCorrectAnswer,
+                    wrongAnswer: wrongAnsweredQuestion,
+                  )),
+        );
       }
     });
   }
@@ -29,7 +37,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: mavi,
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +45,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Text(
             '$currentPage/10',
             style: const TextStyle(
-                color: myAmber,
+                color: siyah,
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5),
@@ -45,7 +53,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Doğru cevap sayısı : $numberOfCorrextAnswer',
+              'Doğru cevap sayısı : $numberOfCorrectAnswer',
               style: const TextStyle(color: Colors.white),
             ),
           ),
@@ -73,7 +81,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         setState(() {
                           if (answer ==
                               questions[currentQuestionIndex].correctAnswer) {
-                            numberOfCorrextAnswer += 1;
+                            numberOfCorrectAnswer += 1;
+                          } else {
+                            wrongAnsweredQuestion.add(currentQuestionIndex);
                           }
                         });
                         updateQuestionAndPage();
@@ -88,6 +98,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 32),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
