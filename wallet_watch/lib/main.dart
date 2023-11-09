@@ -8,7 +8,7 @@ import 'package:wallet_watch/views/home_view.dart';
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
-      body: const HomeView(),
+      body: HomeView(),
       appBar: AppBar(
           backgroundColor: MyColors.secodaryColor,
           title: const appbarTitle(),
@@ -17,7 +17,7 @@ void main() {
             addButton(),
           ]),
     ),
-    routes: {'/toHome': (context) => const HomeView()},
+    routes: {'/toHome': (context) =>  HomeView()},
   ));
 }
 
