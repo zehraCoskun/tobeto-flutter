@@ -15,6 +15,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   int currentQuestionIndex = 0;
   int numberOfCorrectAnswer = 0;
   List<int> wrongAnsweredQuestion = [];
+  List<String> userAnswer = [];
 
   void updateQuestionAndPage() {
     setState(() {
@@ -28,6 +29,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               builder: (context) => ResultScreen(
                     correctAnswers: numberOfCorrectAnswer,
                     wrongAnswer: wrongAnsweredQuestion,
+                    userAnswer: userAnswer,
                   )),
         );
       }
@@ -42,20 +44,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            '$currentPage/10',
-            style: const TextStyle(
-                color: siyah,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5),
-          ),
+          ProgressText(currentPage: currentPage),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Doğru cevap sayısı : $numberOfCorrectAnswer',
-              style: const TextStyle(color: Colors.white),
-            ),
+            child: ScoreText(numberOfCorrectAnswer: numberOfCorrectAnswer),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 24, right: 24),
@@ -63,14 +55,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               crossAxisAlignment: CrossAxisAlignment
                   .stretch, // Buttonların genişliğini eşit yapar
               children: [
-                Text(
-                  questions[currentQuestionIndex].question,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                QuestionNumText(currentQuestionIndex: currentQuestionIndex),
                 const SizedBox(
                     height: 32), // Soru ile cevaplar arasında boşluk ekler
                 ...questions[currentQuestionIndex].answers.map((answer) {
@@ -87,6 +72,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           }
                         });
                         updateQuestionAndPage();
+                        userAnswer.add(answer);
                       },
                       child: Text(
                         answer,
@@ -99,14 +85,84 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
           ),
           const SizedBox(height: 32),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Baştan Başla'),
-          )
+          const StartAgainButton()
         ],
       )),
+    );
+  }
+}
+
+class StartAgainButton extends StatelessWidget {
+  const StartAgainButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const Text('Baştan Başla'),
+    );
+  }
+}
+
+class QuestionNumText extends StatelessWidget {
+  const QuestionNumText({
+    super.key,
+    required this.currentQuestionIndex,
+  });
+
+  final int currentQuestionIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      questions[currentQuestionIndex].question,
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
+
+class ScoreText extends StatelessWidget {
+  const ScoreText({
+    super.key,
+    required this.numberOfCorrectAnswer,
+  });
+
+  final int numberOfCorrectAnswer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Doğru cevap sayısı : $numberOfCorrectAnswer',
+      style: const TextStyle(color: Colors.white),
+    );
+  }
+}
+
+class ProgressText extends StatelessWidget {
+  const ProgressText({
+    super.key,
+    required this.currentPage,
+  });
+
+  final int currentPage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '$currentPage/10',
+      style: const TextStyle(
+          color: siyah,
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.5),
     );
   }
 }

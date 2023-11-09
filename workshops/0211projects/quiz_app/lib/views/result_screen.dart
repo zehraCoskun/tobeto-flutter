@@ -5,8 +5,12 @@ import 'package:quiz_app/data/quetions.dart';
 class ResultScreen extends StatelessWidget {
   final int correctAnswers;
   final List<int> wrongAnswer;
+  final List<String> userAnswer;
 
-  const ResultScreen({required this.correctAnswers, required this.wrongAnswer});
+  const ResultScreen(
+      {required this.correctAnswers,
+      required this.wrongAnswer,
+      required this.userAnswer});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,12 @@ class ResultScreen extends StatelessWidget {
                   final question = questions[wrongQuestionIndex];
                   return ListTile(
                     title: Text(question.question),
-                    subtitle: Text('Doğru Cevap: ${question.correctAnswer}'),
+                    subtitle: Column(
+                      children: [
+                        //!Text('Senin cevabın: $userAnswer'),
+                        Text('Doğru Cevap: ${question.correctAnswer}'),
+                      ],
+                    ),
                   );
                 },
               ),

@@ -22,22 +22,47 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
           Image.asset("lib/assets/images/quiz.png", width: 340),
           Padding(
             padding: const EdgeInsets.only(left: 16),
-            child: Text(
-              textTitle,
-              style: const TextStyle(
-                  color: siyah,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5),
-            ),
+            child: TitleText(textTitle: textTitle),
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/toQuestions');
-              },
-              child: const Text('Başla'))
+          const StartButton()
         ],
       )),
+    );
+  }
+}
+
+class StartButton extends StatelessWidget {
+  const StartButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/toQuestions');
+        },
+        child: const Text('Başla'));
+  }
+}
+
+class TitleText extends StatelessWidget {
+  const TitleText({
+    super.key,
+    required this.textTitle,
+  });
+
+  final String textTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textTitle,
+      style: const TextStyle(
+          color: siyah,
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.5),
     );
   }
 }
