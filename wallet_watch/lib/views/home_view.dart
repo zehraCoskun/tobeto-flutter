@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
 import 'package:wallet_watch/models/expense.dart';
+import 'package:wallet_watch/views/home_appbar.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -23,44 +24,47 @@ class HomeView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(8),
-      itemCount: expenses.length,
-      itemBuilder: (context, index) {
-        return SizedBox(
-          height: lineHeight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: linePadding),
-                    child: Icon(
-                      Icons.credit_score,
-                      color: MyColors.mainColor,
-                      size: lineFont * 2,
+    return Scaffold(
+      appBar: const HomeAppBar(),
+      body: ListView.separated(
+        padding: const EdgeInsets.all(8),
+        itemCount: expenses.length,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: lineHeight,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: linePadding),
+                      child: Icon(
+                        Icons.credit_score,
+                        color: MyColors.mainColor,
+                        size: lineFont * 2,
+                      ),
                     ),
-                  ),
-                  ListText(
-                      expenses: expenses,
-                      index: index,
-                      lineFont: lineFont,
-                      textType: "line") // İkon en solda
-                ],
-              ),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: linePadding),
-                  child: ListText(
-                      expenses: expenses,
-                      index: index,
-                      lineFont: lineFont * 3 / 2,
-                      textType: "price")), // İkinci metin sağa dayalı
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => const Divider(),
+                    ListText(
+                        expenses: expenses,
+                        index: index,
+                        lineFont: lineFont,
+                        textType: "line")
+                  ],
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: linePadding),
+                    child: ListText(
+                        expenses: expenses,
+                        index: index,
+                        lineFont: lineFont * 3 / 2,
+                        textType: "price")),
+              ],
+            ),
+          );
+        },
+        separatorBuilder: (context, index) => const Divider(),
+      ),
     );
   }
 }
@@ -71,7 +75,7 @@ class ListText extends StatelessWidget {
     required this.expenses,
     required this.index,
     required this.lineFont,
-    required this.textType, // "price" veya "list" gibi bir tür ekledik
+    required this.textType, // "price" veya "line"
   });
 
   final List<Expense> expenses;
@@ -95,7 +99,6 @@ class ListText extends StatelessWidget {
     );
   }
 }
-
 
 // class PriceText extends StatelessWidget {
 //   const PriceText(
