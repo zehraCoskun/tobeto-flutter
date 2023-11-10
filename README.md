@@ -9,6 +9,8 @@
 <img width="120" alt="3" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/f864d35e-170e-4c6f-bfde-8010abb24d59">
 
 ## Workshop 6 - Expense App
+https://github.com/zehraCoskun/tobeto-flutter/tree/main/wallet_watch
+
 <img width="120" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/9797254a-5e76-4139-8e44-27477aacb075">
 <img width="120" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/04e3881a-b605-4068-9f6b-b692ee6dd1ca">
 <img width="120" alt="3" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/298f7c5a-b658-401c-9662-b3ad061e1d10">
