@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
-import 'package:wallet_watch/views/add_button.dart';
+import 'package:wallet_watch/views/add_view.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -16,8 +16,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: const ProfilButton(),
         actions: const [
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: AddButton())
+              padding: EdgeInsets.symmetric(horizontal: 8.0), child: AddView())
         ]);
   }
 }
@@ -53,40 +52,3 @@ class AppbarTitle extends StatelessWidget {
     );
   }
 }
-
-
-
-// class AddButton extends StatelessWidget {
-//   const AddButton({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return IconButton(
-//       icon: Icon(
-//         Icons.add_circle,
-//         color: MyColors.otherColor,
-//       ), //
-//       onPressed: () {},
-//     );
-//   }
-// }
-
-
-
-  // void _showBottomSheet(BuildContext context) { 
-  //   showModalBottomSheet(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return const Padding(
-  //         padding: EdgeInsets.all(16.0),
-  //         child: Column(
-  //           children: <Widget>[
-  //             Text('Alt Sayfa İçeriği'),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }

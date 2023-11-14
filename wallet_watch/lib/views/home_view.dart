@@ -3,11 +3,20 @@ import 'package:wallet_watch/assets/mycolors.dart';
 import 'package:wallet_watch/models/expense.dart';
 import 'package:wallet_watch/views/home_appbar.dart';
 
-class HomeView extends StatelessWidget {
-  HomeView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   final double linePadding = 16;
+
   final double lineHeight = 48;
+
   final double lineFont = 16.0;
+
   List<Expense> expenses = [
     Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
     Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
@@ -22,6 +31,7 @@ class HomeView extends StatelessWidget {
     Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
     Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +81,7 @@ class HomeView extends StatelessWidget {
 
 class ListText extends StatelessWidget {
   const ListText({
-    Key? key,
+    super.key,
     required this.expenses,
     required this.index,
     required this.lineFont,
@@ -100,48 +110,3 @@ class ListText extends StatelessWidget {
   }
 }
 
-// class PriceText extends StatelessWidget {
-//   const PriceText(
-//       {super.key,
-//       required this.expenses,
-//       required this.index,
-//       required this.lineFont});
-
-//   final List<Expense> expenses;
-//   final int index;
-//   final double lineFont;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text(
-//       expenses[index].price.toString(),
-//       style: TextStyle(
-//           color: MyColors.mainTextColor,
-//           fontWeight: FontWeight.w600,
-//           fontSize: lineFont),
-//     );
-//   }
-// }
-
-// class ListText extends StatelessWidget {
-//   const ListText({
-//     super.key,
-//     required this.expenses,
-//     required this.index,
-//     required this.lineFont,
-//   });
-
-//   final List<Expense> expenses;
-//   final int index;
-//   final double lineFont;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text(
-//       expenses[index].spend,
-//       style: TextStyle(
-//           color: MyColors.mainTextColor,
-//           fontWeight: FontWeight.w600,
-//           fontSize: lineFont),
-//     );
-//   }
-// }
