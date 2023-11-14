@@ -15,3 +15,7 @@
 <img width="120" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/04e3881a-b605-4068-9f6b-b692ee6dd1ca">
 <img width="120" alt="3" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/298f7c5a-b658-401c-9662-b3ad061e1d10">
 
+### Second Update - 14.11.2023
+<img width="120" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/513c5816-c65f-4309-999f-a2c289967fc6">
+<img width="120" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/1e2b0af9-6d2e-481d-b0a4-27db6189a362">
+
