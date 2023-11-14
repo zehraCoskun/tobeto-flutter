@@ -11,10 +11,10 @@
 ## Workshop 6 - Expense App
 ## https://github.com/zehraCoskun/tobeto-flutter/tree/main/wallet_watch
 
-<img width="120" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/847ba064-fe8d-4c3e-b512-592d4ab4b755">
-<img width="120" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/7798ef57-4797-490e-b3db-bc98748000a2">
-<img width="120" alt="3" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/7f57fbbd-6c4b-4e13-80cd-b7b357a382ec">
-<img width="120" alt="4" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/ac43f714-f609-40ac-ad8a-01c4fdd24673">
+<img width="160" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/847ba064-fe8d-4c3e-b512-592d4ab4b755">
+<img width="160" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/7798ef57-4797-490e-b3db-bc98748000a2">
+<img width="160" alt="3" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/7f57fbbd-6c4b-4e13-80cd-b7b357a382ec">
+<img width="160" alt="4" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/ac43f714-f609-40ac-ad8a-01c4fdd24673">
 
 
 
