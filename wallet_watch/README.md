@@ -11,5 +11,5 @@ Created Login, Home and Add Screen. But I'm only at the beginning, I know.
 
 ## Version 2 - 14/11/2023
 Date Picker added.
-<img width="120" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/1a7965ee-f688-4469-b83a-4006699e9028">
-<img width="120" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/d4168dc3-2603-493f-8734-2c05846f4505">
+<img width="200" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/1a7965ee-f688-4469-b83a-4006699e9028">
+<img width="200" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/d4168dc3-2603-493f-8734-2c05846f4505">
