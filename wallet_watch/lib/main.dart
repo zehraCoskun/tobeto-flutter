@@ -12,7 +12,7 @@ void main() {
       appBar: LoginAppBar(),
     ),
     routes: {
-      '/toHome': (context) => HomeView(),
+      '/toHome': (context) => const HomeView(),
     },
   ));
 }

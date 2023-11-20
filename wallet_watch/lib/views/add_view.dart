@@ -47,13 +47,6 @@ class AddView extends StatelessWidget {
                 ),
               ),
               const NewExpense(),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: MyColors.mainColor),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Ekle"))
             ],
           ),
         );

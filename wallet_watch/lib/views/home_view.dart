@@ -18,18 +18,26 @@ class _HomeViewState extends State<HomeView> {
   final double lineFont = 16.0;
 
   List<Expense> expenses = [
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
-    Expense(spend: "Öğle yemeği", date: DateTime.now(), price: 105),
+    Expense(
+        spend: "Öğle yemeği",
+        date: DateTime.now(),
+        price: 105,
+        category: Category.food),
+    Expense(
+        spend: "Öğle yemeği",
+        date: DateTime.now(),
+        price: 105,
+        category: Category.food),
+    Expense(
+        spend: "Udemy",
+        date: DateTime.now(),
+        price: 45,
+        category: Category.work),
+    Expense(
+        spend: "İzmir",
+        date: DateTime.now(),
+        price: 400,
+        category: Category.travel)
   ];
 
   @override
@@ -50,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: linePadding),
                       child: Icon(
-                        Icons.credit_score,
+                        categoryIcon[expenses[index].category],
                         color: MyColors.mainColor,
                         size: lineFont * 2,
                       ),
@@ -109,4 +117,3 @@ class ListText extends StatelessWidget {
     );
   }
 }
-
