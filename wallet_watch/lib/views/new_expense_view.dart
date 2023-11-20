@@ -1,37 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
+import 'package:wallet_watch/data/expenses.dart';
 import 'package:wallet_watch/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.callback});
+  final Function callback;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  final String spendLabel = "Gider kaleminizi giriniz";
-  final String spendHintText = "Gider";
+  final String spendLabel = "Harcama kaleminizi giriniz";
+  final String spendHintText = "Harcama";
   final String priceLabel = "Harcadığınız tutarı giriniz";
   final String priceHintText = "Harcama tutarı";
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _spendController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   Category _selectedCategory = Category.other;
+  Expenses expenses = Expenses();
 
   @override
   Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: newExpenseForm(context),
+    );
+  }
+
+  Column newExpenseForm(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         NewExpenseTextfield(
-          controller: _usernameController,
+          controller: _spendController,
           labelText: spendLabel,
           hintText: spendHintText,
         ),
         NewExpenseTextfield(
-          controller: _passwordController,
+          controller: _priceController,
           labelText: priceLabel,
           hintText: priceHintText,
           keyboardType: TextInputType.number,
@@ -56,7 +65,16 @@ class _NewExpenseState extends State<NewExpense> {
             style:
                 ElevatedButton.styleFrom(backgroundColor: MyColors.mainColor),
             onPressed: () {
-              Navigator.of(context).pop();
+              Expense newExpense = Expense(
+                  spend: _spendController.text,
+                  date: _selectedDate,
+                  price: double.parse(_priceController.text),
+                  category: _selectedCategory);
+              expenses.addExpense(newExpense);
+              print(expenses.expenses.last.spend);
+              setState(() {
+                Navigator.of(context).pop();
+              });
             },
             child: const Text("Ekle")),
       ],

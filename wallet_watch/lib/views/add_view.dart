@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
+import 'package:wallet_watch/views/home_view.dart';
 import 'package:wallet_watch/views/new_expense_view.dart';
 
-class AddView extends StatelessWidget {
+class AddView extends StatefulWidget {
   const AddView({super.key});
+
+  @override
+  State<AddView> createState() => _AddViewState();
+}
+
+class _AddViewState extends State<AddView> {
+  HomeViewState homeViewState = HomeViewState();
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +47,16 @@ class AddView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  "Yeni Bir Gider Ekle",
+                  "Yeni Bir Harcama Ekle",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: MyColors.mainTextColor,
                   ),
                 ),
               ),
-              const NewExpense(),
+              NewExpense(callback: () {
+                homeViewState.build(context);
+              })
             ],
           ),
         );

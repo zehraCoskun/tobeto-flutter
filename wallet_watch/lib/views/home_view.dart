@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
+import 'package:wallet_watch/data/expenses.dart';
 import 'package:wallet_watch/models/expense.dart';
 import 'package:wallet_watch/views/home_appbar.dart';
 
@@ -7,38 +8,14 @@ class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeView> createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   final double linePadding = 16;
-
   final double lineHeight = 48;
-
   final double lineFont = 16.0;
-
-  List<Expense> expenses = [
-    Expense(
-        spend: "Öğle yemeği",
-        date: DateTime.now(),
-        price: 105,
-        category: Category.food),
-    Expense(
-        spend: "Öğle yemeği",
-        date: DateTime.now(),
-        price: 105,
-        category: Category.food),
-    Expense(
-        spend: "Udemy",
-        date: DateTime.now(),
-        price: 45,
-        category: Category.work),
-    Expense(
-        spend: "İzmir",
-        date: DateTime.now(),
-        price: 400,
-        category: Category.travel)
-  ];
+  List<Expense> expenses = Expenses().expenses;
 
   @override
   Widget build(BuildContext context) {
