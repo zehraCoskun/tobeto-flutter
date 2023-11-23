@@ -15,8 +15,8 @@ void main() {
             backgroundColor: MyColors.mainColor,
             foregroundColor: MyColors.secondaryTextColor,
             titleTextStyle: GoogleFonts.nunito(
-              fontSize: 48,
-              fontWeight: FontWeight.w300,
+              fontSize: 36,
+              fontWeight: FontWeight.w400,
             ),
             iconTheme: IconThemeData(size: 36, color: MyColors.otherColor)),
         cardTheme: CardTheme(

@@ -49,8 +49,6 @@ class HomeViewState extends State<HomeView> {
     setState(() {
       removeExpenseList.add(expense);
       expenses.remove(expense);
-      print(expense);
-      print(expenses.length);
     });
   }
 
@@ -64,7 +62,6 @@ class HomeViewState extends State<HomeView> {
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    //backgroundColor: MyColors.secondaryTextColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12.0),
@@ -99,7 +96,6 @@ class HomeViewState extends State<HomeView> {
         body: ExpensesView(
           expenses: expenses,
           onRemove: removeExpense,
-          // onUndo: undoLastExpense,
         ));
   }
 }

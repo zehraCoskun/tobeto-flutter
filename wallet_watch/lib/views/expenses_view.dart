@@ -18,8 +18,8 @@ class ExpensesViewState extends State<ExpensesView> {
   final double linePadding = 16;
   final double lineHeight = 48;
   final double lineFont = 16.0;
-  Expense removeExpenseItem = Expense(
-      spend: "", date: DateTime.now(), price: 0, category: Category.other);
+  String removeID = "";
+  Expense? removeExpenseItem;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ExpensesViewState extends State<ExpensesView> {
       itemCount: widget.expenses.length,
       itemBuilder: (context, index) {
         return Dismissible(
-            key: ValueKey(index),
+            key: Key(widget.expenses[index].id), //!
             child: SizedBox(
               height: lineHeight,
               child: Row(
@@ -62,22 +62,28 @@ class ExpensesViewState extends State<ExpensesView> {
               ),
             ),
             onDismissed: (direction) {
-              widget.expenses.removeAt(index);
-              final snackBar = SnackBar(
-                content: Text("${removeExpenseItem.spend} Harcamanız silindi"),
-                action: SnackBarAction(
-                  label: "Geri Al",
-                  onPressed: () {
-                    setState(() {
-                      widget.expenses.add(removeExpenseItem);
-                    });
-                  },
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }
-            // },
-            );
+              setState(() {
+                // removeID = widget.expenses[index].id;
+                // print(removeID);
+                removeExpenseItem = widget.expenses.removeAt(index);
+                widget.expenses.remove(removeExpenseItem);
+
+                final snackBar = SnackBar(
+                  content:
+                      Text("${removeExpenseItem!.spend} Harcamanız silindi"),
+                  action: SnackBarAction(
+                    label: "Geri Al",
+                    onPressed: () {
+                      setState(() {
+                        widget.expenses.insert(index,
+                            removeExpenseItem!); // Widget'ın listesine geri ekle
+                      });
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
+            });
       },
       separatorBuilder: (context, index) => const Divider(),
     );
