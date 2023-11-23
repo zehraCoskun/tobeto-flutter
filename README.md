@@ -12,7 +12,6 @@
 https://github.com/zehraCoskun/tobeto-flutter/tree/main/wallet_watch
 
 <img width="356" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/c256e17b-313c-4c19-bc31-8d37cfef14eb">
-
 <img width="400" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/ff002325-3e47-4206-aade-e084a0ff8f0d">
 
 
