@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   uuid: ^4.2.1
   intl: ^0.18.1
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,5 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

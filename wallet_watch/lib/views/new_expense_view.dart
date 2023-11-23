@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wallet_watch/assets/mycolors.dart';
-import 'package:wallet_watch/data/expenses.dart';
 import 'package:wallet_watch/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key, required this.callback});
-  final Function callback;
+  const NewExpense({super.key, required this.onAdd});
+  final void Function(Expense expense) onAdd;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
@@ -21,7 +20,6 @@ class _NewExpenseState extends State<NewExpense> {
   final TextEditingController _priceController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   Category _selectedCategory = Category.other;
-  Expenses expenses = Expenses();
 
   @override
   Widget build(BuildContext context) {
@@ -62,19 +60,17 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
         ElevatedButton(
-            style:
-                ElevatedButton.styleFrom(backgroundColor: MyColors.mainColor),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: MyColors.secondaryColor,
+                foregroundColor: MyColors.secondaryTextColor),
             onPressed: () {
               Expense newExpense = Expense(
                   spend: _spendController.text,
                   date: _selectedDate,
                   price: double.parse(_priceController.text),
                   category: _selectedCategory);
-              expenses.addExpense(newExpense);
-              print(expenses.expenses.last.spend);
-              setState(() {
-                Navigator.of(context).pop();
-              });
+              widget.onAdd(newExpense);
+              Navigator.of(context).pop();
             },
             child: const Text("Ekle")),
       ],
@@ -102,6 +98,7 @@ class _NewExpenseState extends State<NewExpense> {
   }
 
   DropdownButton<Category> categoryButton() {
+    //kategori butonu
     return DropdownButton(
         dropdownColor: MyColors.secondaryTextColor,
         iconEnabledColor: MyColors.mainColor,
@@ -121,6 +118,7 @@ class _NewExpenseState extends State<NewExpense> {
 }
 
 class NewExpenseTextfield extends StatelessWidget {
+  //harcama ve tutar textfield'ları
   final TextEditingController controller;
   final String labelText;
   final String hintText;
