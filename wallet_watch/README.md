@@ -31,6 +31,10 @@ Chart added and final version 🥳
 <img width="224" alt="Ekran Resmi 2023-11-27 11 48 17" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/500399b3-c6a4-4919-87e8-121197aa2060">
 <img width="224" alt="Ekran Resmi 2023-11-27 11 48 34" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/46ab9db4-e7f7-40bb-8b91-0f97f0a14842">
 
+<img width="215" alt="Ekran Resmi 2023-11-27 11 50 37" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/a133bb14-31ee-4581-bd48-f5c9d009f0f7">
+<img width="215" alt="Ekran Resmi 2023-11-27 11 50 42" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/ef53c242-abcc-4074-8033-b6055ab31b31">
+
+
 </div>
 
 
