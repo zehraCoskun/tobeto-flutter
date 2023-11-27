@@ -15,3 +15,14 @@ Date Picker added.
 
 <img width="200" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/1a7965ee-f688-4469-b83a-4006699e9028">
 <img width="200" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/d4168dc3-2603-493f-8734-2c05846f4505">
+
+
+## Version 3 - 23/11/2023
+Category added but login page is deleted. We can now delete our expenses.
+
+<img width="200" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/f51e3e3d-42ac-4c13-acf3-4bf9f3233a85">
+<img width="200" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/c33bacb0-4417-4f5e-8c31-b658615a26f3">
+
+
+
+
