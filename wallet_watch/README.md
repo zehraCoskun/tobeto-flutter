@@ -28,7 +28,7 @@ Category added but login page is deleted. We can now delete our expenses.
 Chart added and final version 🥳
 
 <div>
-<img width="275" alt="Ekran Resmi 2023-11-27 11 35 20" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/a3ed2622-d83d-44c9-b80a-29c4c139af8c">
+<img width="200" alt="Ekran Resmi 2023-11-27 11 35 20" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/a3ed2622-d83d-44c9-b80a-29c4c139af8c">
 <img width="275" alt="Ekran Resmi 2023-11-27 11 35 31" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/dd184a49-fd12-4352-8b8d-cc9cc360fd91">
 </div>
 
