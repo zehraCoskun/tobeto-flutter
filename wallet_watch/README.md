@@ -24,5 +24,8 @@ Category added but login page is deleted. We can now delete our expenses.
 <img width="200" alt="2" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/c33bacb0-4417-4f5e-8c31-b658615a26f3">
 
 
-
+## Version 4 - 27/11/2023
+Chart added and final version 🥳
+<img width="319" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/03f9022e-c76c-496c-8ea1-09626495931a">
+<img width="275" alt="5" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/5a378f64-ab6c-4da5-a452-c3a65d67b909">
 
