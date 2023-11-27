@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_watch/models/expense.dart';
+import 'package:wallet_watch/views/chart.dart';
 
 class ExpensesView extends StatefulWidget {
   const ExpensesView({
@@ -23,70 +24,79 @@ class ExpensesViewState extends State<ExpensesView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(8),
-      itemCount: widget.expenses.length,
-      itemBuilder: (context, index) {
-        return Dismissible(
-            key: Key(widget.expenses[index].id), //!
-            child: SizedBox(
-              height: lineHeight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: linePadding),
-                        child: Icon(
-                          categoryIcon[widget.expenses[index].category],
-                          // color: MyColors.mainColor,
-                          size: lineFont * 2,
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 150, child: Chart(allExpense: widget.expenses)),
+        Expanded(
+          child: ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: widget.expenses.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                  key: Key(widget.expenses[index]
+                      .id), //listeden silinen expensin indexinin uniq olmasını sağlar
+                  child: SizedBox(
+                    height: lineHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: linePadding),
+                              child: Icon(
+                                categoryIcon[widget.expenses[index].category],
+                                size: lineFont * 2,
+                              ),
+                            ),
+                            ListText(
+                                expenses: widget.expenses,
+                                index: index,
+                                lineFont: lineFont,
+                                textType: "line")
+                          ],
                         ),
-                      ),
-                      ListText(
-                          expenses: widget.expenses,
-                          index: index,
-                          lineFont: lineFont,
-                          textType: "line")
-                    ],
+                        Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: linePadding),
+                            child: ListText(
+                                expenses: widget.expenses,
+                                index: index,
+                                lineFont: lineFont * 3 / 2,
+                                textType: "price")),
+                      ],
+                    ),
                   ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(horizontal: linePadding),
-                      child: ListText(
-                          expenses: widget.expenses,
-                          index: index,
-                          lineFont: lineFont * 3 / 2,
-                          textType: "price")),
-                ],
-              ),
-            ),
-            onDismissed: (direction) {
-              setState(() {
-                // removeID = widget.expenses[index].id;
-                // print(removeID);
-                removeExpenseItem = widget.expenses.removeAt(index);
-                widget.expenses.remove(removeExpenseItem);
+                  onDismissed: (direction) {
+                    setState(() {
+                      removeExpenseItem = widget.expenses.removeAt(index);
+                      widget.expenses.remove(removeExpenseItem);
 
-                final snackBar = SnackBar(
-                  content:
-                      Text("${removeExpenseItem!.spend} Harcamanız silindi"),
-                  action: SnackBarAction(
-                    label: "Geri Al",
-                    onPressed: () {
-                      setState(() {
-                        widget.expenses.insert(index,
-                            removeExpenseItem!); // Widget'ın listesine geri ekle
-                      });
-                    },
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              });
-            });
-      },
-      separatorBuilder: (context, index) => const Divider(),
-    );
+                      final snackBar = SnackBar(
+                        content: Text(
+                            "${removeExpenseItem!.spend} Harcamanız silindi"),
+                        action: SnackBarAction(
+                          label: "Geri Al",
+                          onPressed: () {
+                            setState(() {
+                              widget.expenses.insert(index,
+                                  removeExpenseItem!); // Widget'ın listesine geri ekle
+                            });
+                          },
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    });
+                  });
+            },
+            separatorBuilder: (context, index) => const Divider(),
+          ),
+        ),
+      ],
+    ));
   }
 }
 

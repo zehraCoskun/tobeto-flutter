@@ -57,46 +57,47 @@ class HomeViewState extends State<HomeView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12.0),
-                        topRight: Radius.circular(12.0),
-                      ),
-                    ),
-                    builder: (ctx) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 16.0),
-                              child: Text(
-                                "Yeni Bir Harcama Ekle",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  //color: MyColors.mainTextColor,
-                                ),
-                              ),
-                            ),
-                            NewExpense(onAdd: addExpense)
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.add))
-          ],
+          actions: [addButton(context)],
         ),
         body: ExpensesView(
           expenses: expenses,
           onRemove: removeExpense,
         ));
+  }
+
+  IconButton addButton(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                topRight: Radius.circular(12.0),
+              ),
+            ),
+            builder: (ctx) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 16.0),
+                      child: Text(
+                        "Yeni Bir Harcama Ekle",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    NewExpense(onAdd: addExpense)
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        icon: const Icon(Icons.add));
   }
 }
 
