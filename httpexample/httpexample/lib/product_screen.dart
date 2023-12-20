@@ -21,46 +21,27 @@ class _ProductScreenState extends State<ProductScreen> {
     getProducts();
   }
 
-  void getProducts() async {
+  Future<List<ProductModel>> getProducts() async {
+    List<ProductModel> products = [];
     Uri url = Uri.https("dummyjson.com", "products");
     final response = await http.get(url);
-    final dataJson = json.decode(response.body);
-
-    List<ProductModel> products = [];
-
-    for (var productJson in dataJson["products"]) {
-      if (productJson["price"] is int) {
-        productJson["price"] = productJson["price"].toDouble();
-      }
-
-      ProductModel productModel = ProductModel(
-        //raiting: productJson["raiting"],
-        id: productJson["id"],
-        title: productJson["title"],
-        description: productJson["description"],
-        price: productJson["price"],
-        discountPercentage: productJson["discountPercentage"],
-        stock: productJson["stock"],
-        brand: productJson["brand"],
-        category: productJson["category"],
-        thumbnail: productJson["thumbnail"],
-        images: productJson["images"],
-      );
-      products.add(productModel);
+    final dataJson = (json.decode(response.body))['products'];
+    for (Map<String, dynamic> json in dataJson) {
+      products.add(ProductModel.fromJson(json));
     }
     setState(() {
       productList = products;
     });
+
+    return products;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-          itemCount: productList.length,
-          itemBuilder: (ctx, index) => ProductItem(
-                product: productList[index],
-              )),
-    );
+    return ListView.builder(
+        itemCount: productList.length,
+        itemBuilder: (ctx, index) => ProductItem(
+              product: productList[index],
+            ));
   }
 }
