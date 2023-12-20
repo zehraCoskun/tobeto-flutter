@@ -19,7 +19,7 @@ https://github.com/zehraCoskun/tobeto-flutter/tree/main/wallet_watch
 
 ## HTTP Example 
 
-<img width="120" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/0c77eea1-c318-41b5-b266-ad8699f19318">
+<img width="320" alt="1" src="https://github.com/zehraCoskun/tobeto-flutter/assets/110024096/0c77eea1-c318-41b5-b266-ad8699f19318">
 
 
 
