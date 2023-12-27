@@ -32,7 +32,7 @@ class _HomepageState extends State<Homepage> {
         ),
         body: BlocBuilder<ArticleBloc, ArticleState>(
           builder: (context, state) {
-            if (state is ArticlesInitial || state is ArticleLoaded) {
+            if (state is ArticlesInitial) {
               context.read<ArticleBloc>().add(FetchArticles());
               return const Center(
                 child: CircularProgressIndicator(),

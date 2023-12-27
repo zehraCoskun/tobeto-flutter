@@ -8,33 +8,33 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
 
   ArticleBloc(this.articleRepository) : super(ArticlesInitial()) {
     on<FetchArticles>(_onFetchAll);
-    on<FetchArticle>(_onFetchOnly);
     on<AddArticle>(_onAdd);
   }
-
   void _onFetchAll(FetchArticles event, Emitter<ArticleState> emit) async {
-    emit(ArticlesLoading()); //emit state'i değiştirebilmeyi sağlar
-    final blogList = await articleRepository.fetchBlogs();
-    emit(ArticlesLoaded(blogs: blogList));
-  }
-
-  void _onFetchOnly(FetchArticle event, Emitter<ArticleState> emit) async {
-    emit(ArticlesLoading());
-    final blog = await articleRepository.fetchBlog(event.id);
-    emit(ArticleLoaded(blog: blog));
+    try {
+      emit(ArticlesLoading());
+      final blogList = await articleRepository.fetchBlogs();
+      emit(ArticlesLoaded(blogs: blogList));
+    } catch (e) {
+      emit(ArticlesError());
+    }
   }
 
   void _onAdd(AddArticle event, Emitter<ArticleState> emit) async {
-    final response = await articleRepository.addToBlogs(
-      event.title,
-      event.content,
-      event.author,
-      event.file,
-    );
+    try {
+      final response = await articleRepository.addToBlogs(
+        event.title,
+        event.content,
+        event.author,
+        event.file,
+      );
 
-    if (response) {
-      emit(ArticlesSuccess());
-    } else {
+      if (response) {
+        emit(ArticlesSuccess());
+      } else {
+        emit(ArticlesError());
+      }
+    } catch (e) {
       emit(ArticlesError());
     }
   }

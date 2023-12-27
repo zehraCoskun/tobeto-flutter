@@ -14,12 +14,4 @@ class ArticlesSuccess extends ArticleState {}
 
 class ArticlesLoading extends ArticleState {}
 
-class ArticleLoaded extends ArticleState {
-  final Blog blog;
-
-  ArticleLoaded({required this.blog});
-}
-
-
-
 class ArticlesError extends ArticleState {}
