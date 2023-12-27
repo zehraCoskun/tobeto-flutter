@@ -21,7 +21,7 @@ class BlogItem extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => DetailScreen(
-                    blogItem: blog,
+                    id: blog.id,
                   ),
                 ),
               );
