@@ -23,9 +23,8 @@ class _HomepageState extends State<Homepage> {
             IconButton(
                 onPressed: () async {
                   bool? result = await Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const AddBlog()));
-
                   if (result == true) {
-                    //fetchBlogs();
+                    initState();
                   }
                 },
                 icon: const Icon(Icons.add))
@@ -33,10 +32,10 @@ class _HomepageState extends State<Homepage> {
         ),
         body: BlocBuilder<ArticleBloc, ArticleState>(
           builder: (context, state) {
-            if (state is ArticlesInitial || state is ArticlesSuccess || state is ArticleLoaded) {
+            if (state is ArticlesInitial || state is ArticleLoaded) {
               context.read<ArticleBloc>().add(FetchArticles());
               return const Center(
-                child: Text("İstek Atılıyor"),
+                child: CircularProgressIndicator(),
               );
             }
             if (state is ArticlesLoading) {
@@ -44,17 +43,24 @@ class _HomepageState extends State<Homepage> {
                 child: CircularProgressIndicator(),
               );
             }
+            if (state is ArticlesLoaded) {
+              return ListView.builder(
+                  itemCount: state.blogs.length,
+                  itemBuilder: (context, index) {
+                    return BlogItem(
+                      blog: state.blogs[index],
+                    );
+                  });
+            }
             if (state is ArticlesError) {
               return const Center(
-                child: Text("İstek hatalı"),
+                child: Text("Tekrar Deneyin"),
+              );
+            } else {
+              return Center(
+                child: Text(state.toString()),
               );
             }
-            if (state is ArticlesLoaded) {
-              return ListView.builder(itemCount: state.blogs.length, itemBuilder: (context, index) => BlogItem(blog: state.blogs[index]));
-            }
-            return const Center(
-              child: Text("Bilinmedik durum"),
-            );
           },
         ));
   }

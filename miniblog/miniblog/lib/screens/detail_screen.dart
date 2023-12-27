@@ -19,14 +19,12 @@ class DetailScreen extends StatelessWidget {
             if (state is ArticlesInitial || state is ArticlesLoaded || state is ArticlesSuccess || state is ArticlesLoading) {
               context.read<ArticleBloc>().add(FetchArticle(id: id));
             }
-            // if (state is ArticlesLoading) {
-            //   return const Center(
-            //     child: CircularProgressIndicator(),
-            //   );
-            // }
+            if (state is ArticlesLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
             if (state is ArticlesError) {
               return const Center(
-                child: Text("Hata"),
+                child: Text("Hata!"),
               );
             }
             if (state is ArticleLoaded) {
@@ -48,9 +46,8 @@ class DetailScreen extends StatelessWidget {
               );
             } else {
               return const Center(
-                  child:
-                      // CircularProgressIndicator(),
-                      Text("aa"));
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ));
