@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miniblog/blocs/article_bloc/article_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:miniblog/blocs/article_bloc/article_event.dart';
 import 'package:miniblog/blocs/article_bloc/article_state.dart';
 import 'package:miniblog/screens/add_blog.dart';
 import 'package:miniblog/widgets/blog_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -14,6 +17,47 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  bool darkMode = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getDarkMode();
+    setJson();
+    getJson();
+  }
+
+  void setJson() async {
+    Map<String, dynamic> json = {'name': 'Halit Enes', 'surname': "Kalaycı", 'age': 25};
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final jsonAsString = jsonEncode(json);
+    sharedPrefs.setString("user", jsonAsString);
+  }
+
+  void getJson() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final jsonAsString = sharedPrefs.getString("user");
+    Map<String, dynamic> json = jsonDecode(jsonAsString!);
+  }
+
+  void getDarkMode() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final isDarkMode = sharedPrefs.getBool("darkMode");
+    if (isDarkMode != null) {
+      setState(() {
+        darkMode = isDarkMode;
+      });
+    }
+  }
+
+  void onDarkModeChange(bool value) async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.setBool("darkMode", value);
+    setState(() {
+      darkMode = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,13 +88,28 @@ class _HomepageState extends State<Homepage> {
               );
             }
             if (state is ArticlesLoaded) {
-              return ListView.builder(
-                  itemCount: state.blogs.length,
-                  itemBuilder: (context, index) {
-                    return BlogItem(
-                      blog: state.blogs[index],
-                    );
-                  });
+              return Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Switch(
+                        value: darkMode,
+                        onChanged: (value) {
+                          onDarkModeChange(value);
+                        }),
+                  ),
+                  Expanded(
+                    flex: 30,
+                    child: ListView.builder(
+                        itemCount: state.blogs.length,
+                        itemBuilder: (context, index) {
+                          return BlogItem(
+                            blog: state.blogs[index],
+                          );
+                        }),
+                  ),
+                ],
+              );
             }
             if (state is ArticlesError) {
               return const Center(
