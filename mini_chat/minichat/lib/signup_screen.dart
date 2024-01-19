@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/entry_container_widget.dart';
+import 'package:minichat/home_screen.dart';
 import 'package:minichat/signin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -21,6 +22,7 @@ class _SignUpState extends State<SignUp> {
         email: _email,
         password: _password,
       );
+      firebaseFirestore.collection("users").doc(userCredentials.user!.uid).set({"email": _email});
     } on FirebaseAuthException catch (error) {
       //fırlatılan hatayı yakala
       ScaffoldMessenger.of(context).showSnackBar(
