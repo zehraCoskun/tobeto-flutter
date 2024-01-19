@@ -1,8 +1,41 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:minichat/signup_screen.dart';
 
-class Home extends StatelessWidget {
+final firebaseStorageInstance = FirebaseStorage.instance;
+
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  File? _selectedImage;
+  void _pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      setState(() {
+        _selectedImage = File(image.path);
+      });
+    }
+  }
+
+  void _uploadImage() async {
+    if (_selectedImage != null) {
+      User? loggedInUser = firebaseAuthInstance.currentUser;
+
+      final storageRef = firebaseStorageInstance.ref().child("images").child("${loggedInUser!.uid}.jpeg");
+      await storageRef.putFile(_selectedImage!);
+      final url = await storageRef.getDownloadURL();
+      //await firebaseFireStore.collection("users").doc(loggedInUser.uid).update({"imageUrl": url});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +52,17 @@ class Home extends StatelessWidget {
         ],
       ),
       body: Column(children: [
-        const CircleAvatar(
-          radius: 40,
-        ),
-        TextButton(onPressed: () {}, child: const Text("Resim Seç")),
-        TextButton(onPressed: () {}, child: const Text("Yükle")),
+        CircleAvatar(radius: 40, foregroundImage: _selectedImage != null ? FileImage(_selectedImage!) : null),
+        TextButton(
+            onPressed: () {
+              _pickImage();
+            },
+            child: const Text("Resim Seç")),
+        TextButton(
+            onPressed: () {
+              _uploadImage();
+            },
+            child: const Text("Yükle")),
       ]),
     );
   }
