@@ -9,15 +9,22 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Mini Chat'e Hoşgeldin"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              firebaseAuthInstance.signOut();
+            },
+            child: const Text("X"),
+          )
+        ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            firebaseAuthInstance.signOut();
-          },
-          child: const Text("Çıkış Yap"),
+      body: Column(children: [
+        const CircleAvatar(
+          radius: 40,
         ),
-      ),
+        TextButton(onPressed: () {}, child: const Text("Resim Seç")),
+        TextButton(onPressed: () {}, child: const Text("Yükle")),
+      ]),
     );
   }
 }
