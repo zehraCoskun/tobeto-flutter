@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       String? token = await fcm.getToken();
+      print(token);
       _updateTokenInDb(token!);
       fcm.onTokenRefresh.listen((token) {
         _updateTokenInDb(token);
