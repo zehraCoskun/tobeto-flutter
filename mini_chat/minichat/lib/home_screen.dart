@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
   }
 
   void _pickImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
         _selectedImage = File(image.path);
