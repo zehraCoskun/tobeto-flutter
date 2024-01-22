@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:minichat/entry_container_widget.dart';
 
 final firebaseAuthInstance = FirebaseAuth.instance;
 final firebaseStorageInstance = FirebaseStorage.instance;
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       String? token = await fcm.getToken();
-      print(token);
+      print("TOKEN : $token");
       _updateTokenInDb(token!);
       fcm.onTokenRefresh.listen((token) {
         _updateTokenInDb(token);
@@ -86,33 +87,35 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(children: [
-            const SizedBox(height: 30),
-            if (_selectedImage == null)
-              FutureBuilder(
-                  future: _getUserImage(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-                      return CircleAvatar(backgroundColor: Colors.white, radius: 40, foregroundImage: NetworkImage(snapshot.data!));
-                    }
-                    if (snapshot.hasError) {
-                      return const Text("Avatar yüklenirken bir hata oluştu..");
-                    }
-                    return const CircularProgressIndicator();
-                  }),
-            if (_selectedImage != null) CircleAvatar(radius: 40, foregroundImage: FileImage(_selectedImage!)),
-            TextButton(
-                onPressed: () {
-                  _pickImage();
-                },
-                child: const Text("Resim Seç")),
-            if (_selectedImage != null)
-              ElevatedButton(
+          EntryContainer(
+            child: Column(children: [
+              const SizedBox(height: 30),
+              if (_selectedImage == null)
+                FutureBuilder(
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                        return CircleAvatar(backgroundColor: Colors.white, radius: 40, foregroundImage: NetworkImage(snapshot.data!));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text("Avatar yüklenirken bir hata oluştu..");
+                      }
+                      return const CircularProgressIndicator();
+                    }),
+              if (_selectedImage != null) CircleAvatar(radius: 40, foregroundImage: FileImage(_selectedImage!)),
+              TextButton(
                   onPressed: () {
-                    _uploadImage();
+                    _pickImage();
                   },
-                  child: const Text("Yükle"))
-          ]),
+                  child: const Text("Resim Seç")),
+              if (_selectedImage != null)
+                ElevatedButton(
+                    onPressed: () {
+                      _uploadImage();
+                    },
+                    child: const Text("Yükle"))
+            ]),
+          ),
         ],
       ),
     );
