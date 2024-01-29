@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:minichat/api/bloc/user_event.dart';
-import 'package:minichat/api/bloc/user_state.dart';
+import 'package:minichat/api/bloc/user_bloc/user_event.dart';
+import 'package:minichat/api/bloc/user_bloc/user_state.dart';
 import 'package:minichat/api/service/user_service.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -11,8 +11,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     //UserEventAdd olayı tetiklendiğinde _onAdd metodu çalıştırılır
   }
 
-  void _onAdd(UserEventAdd event, Emitter<UserState> state) async {
-    final id = await _userService.create(event.data);
+  void _onAdd(UserEventAdd event, Emitter<UserState> emit) async {
+    emit(UserStateRegistering());
+    await _userService.create(event.user);
+    emit(UserStateRegistered());
   }
 }
 /*

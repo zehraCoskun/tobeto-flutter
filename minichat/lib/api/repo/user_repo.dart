@@ -16,6 +16,7 @@ class UserRepository {
   }
 
   Future<DocumentReference<Map<String, dynamic>>> create(Map<String, dynamic> data) async {
+    _collection.get().then((value) => value.docs.map((e) => e.data()));
     return await _collection.add(data);
   }
 }
