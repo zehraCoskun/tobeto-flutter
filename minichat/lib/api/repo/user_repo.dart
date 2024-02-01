@@ -9,7 +9,9 @@ class UserRepository {
 
   const UserRepository._privateConstructor(this._collection);
 
-  static final UserRepository _instance = UserRepository._privateConstructor(FirebaseFirestore.instance.collection("users"));
+  static final UserRepository _instance = UserRepository._privateConstructor(
+    FirebaseFirestore.instance.collection("users"),
+  );
 
   factory UserRepository.instance() {
     return _instance;

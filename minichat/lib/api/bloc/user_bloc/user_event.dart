@@ -7,3 +7,13 @@ class UserEventAdd implements UserEvent {
 
   UserEventAdd({required this.user});
 }
+
+class UserEventUpdate implements UserEvent {
+  final String id;
+  final Map<String, dynamic> data;
+
+  UserEventUpdate({
+    required this.id,
+    required this.data,
+  });
+}
