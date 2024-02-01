@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final result = await _authService.register(request.email, request.password);
     final id = await _userService.create(
-      UserCreateRequest(id: result!, fullName: request.fullName, email: request.email, imageUrl: request.imageUrl),
+      UserCreateRequest(id: result!, fullName: request.fullName, email: request.email),
     );
 
     emit(AuthStateRegistered(id: id!));

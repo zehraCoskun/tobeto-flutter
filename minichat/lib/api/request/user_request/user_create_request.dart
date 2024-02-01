@@ -2,13 +2,13 @@ class UserCreateRequest {
   final String id;
   final String fullName;
   final String email;
-  final String imageUrl;
+  final String? imageUrl;
 
   UserCreateRequest({
     required this.id,
     required this.fullName,
     required this.email,
-    required this.imageUrl,
+    this.imageUrl,
   });
 
   Map<String, dynamic> toJson() => {

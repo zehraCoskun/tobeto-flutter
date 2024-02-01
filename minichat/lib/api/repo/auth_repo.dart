@@ -19,7 +19,7 @@ class AuthRepository {
   }
 
   Future<UserCredential> login(String email, String password) async {
-    return await _firebaseAuth.createUserWithEmailAndPassword(
+    return await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
