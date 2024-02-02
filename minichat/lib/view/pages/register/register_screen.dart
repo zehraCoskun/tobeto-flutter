@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/view/pages/login/login_form.dart';
+import 'package:minichat/view/pages/register/register_form.dart';
 import 'package:minichat/view/widget/entry_container_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text("Mini Chat"),
       ),
       body: const EntryContainer(
-        child: LoginForm(),
+        child: RegisterForm(),
       ),
     );
   }

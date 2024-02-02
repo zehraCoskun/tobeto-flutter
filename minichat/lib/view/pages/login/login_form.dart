@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/view/pages/login/login_form_field.dart';
+import 'package:minichat/view/pages/register/register_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -42,19 +43,6 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Widget buildTitle() {
-    return const Text(
-      "Chatting",
-      style: TextStyle(
-        color: Colors.deepPurple,
-        fontWeight: FontWeight.bold,
-        fontSize: 25,
-        fontStyle: FontStyle.italic,
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
-
   Widget buildFormFields() {
     return Column(
       children: <Widget>[
@@ -79,11 +67,11 @@ class _LoginFormState extends State<LoginForm> {
           alignment: Alignment.bottomRight,
           child: InkWell(
             onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //    builder: (context) => const RegisterPage(),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const RegisterScreen(),
+                ),
+              );
             },
             child: const Text(
               "Register?",
