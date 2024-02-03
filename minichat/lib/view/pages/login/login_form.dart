@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:minichat/api/bloc/auth_bloc/auth_bloc.dart';
+import 'package:minichat/api/bloc/auth_bloc/auth_event.dart';
+import 'package:minichat/api/bloc/auth_bloc/auth_state.dart';
 import 'package:minichat/view/pages/login/login_form_field.dart';
 import 'package:minichat/view/pages/register/register_screen.dart';
 
@@ -79,7 +83,13 @@ class _LoginFormState extends State<LoginForm> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            final result = _formKey.currentState!.validate();
+            if (result) {
+              _formKey.currentState!.save();
+              context.read<AuthBloc>().add(LoginEvent(email: emailController.text, password: passwordController.text));
+            }
+          },
           child: const Text("Login"),
         ),
       ],
