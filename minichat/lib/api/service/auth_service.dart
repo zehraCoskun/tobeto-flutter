@@ -24,6 +24,33 @@ class AuthService {
     return result.user!.uid;
   }
 
+  Future<String?> login(String email, String password) async {
+    final uid = await _authRepository.login(email, password).then((value) {
+      return value.user?.uid;
+    });
+
+    // if (uid != null) {
+    //   await _userService.update(uid, {
+    //     "isOnline": true,
+    //     "lastActive": DateTime.now(),
+    //   });
+    // }
+
+    return uid;
+  }
+
+  Future<void> logout() async {
+    final user = await _authRepository.getUser();
+
+    if (user != null) {
+      // await _userService.update(user.uid, {
+      //   "isOnline": false,
+      //   "lastActive": DateTime.now(),
+      // });
+      await _authRepository.logout();
+    }
+  }
+
   Future<User?> getUser() async {
     return _authRepository.getUser();
   }

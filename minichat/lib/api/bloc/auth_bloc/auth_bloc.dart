@@ -1,27 +1,57 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:minichat/api/bloc/auth_bloc/auth_event.dart';
 import 'package:minichat/api/bloc/auth_bloc/auth_state.dart';
-import 'package:minichat/api/request/auth_request/auth_register_request.dart';
-import 'package:minichat/api/request/user_request/user_create_request.dart';
 import 'package:minichat/api/service/auth_service.dart';
 import 'package:minichat/api/service/user_service.dart';
 
+
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthService _authService;
-  final UserService _userService;
 
-  AuthBloc(this._authService, this._userService) : super(AuthStateInitialize()) {
-    on<AuthEventRegister>((event, emit) => _onRegister(event.request, emit));
+  AuthBloc(this._authService, UserService userService) : super(AuthStateLoggedOut()) {
+    on(_onLogin);
+    on(_onRegister);
+    on(_onLogout);
+    on(_onInitialize);
   }
 
-  void _onRegister(AuthRegisterRequest request, Emitter<AuthState> emit) async {
-    emit(AuthStateRegistering());
+  void _onInitialize(AuthEventInitialize event, Emitter<AuthState> emit) async {
+    final user = await _authService.getUser();
+    if (user == null) {
+      emit(AuthStateLoggedOut());
+    } else {
+      emit(AuthStateLoggedIn());
+    }
+  }
 
-    final result = await _authService.register(request.email, request.password);
-    final id = await _userService.create(
-      UserCreateRequest(id: result!, fullName: request.fullName, email: request.email),
+  void _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
+    emit(AuthStateLoggedIn(isLoading: true));
+
+    await _authService.login(event.email, event.password);
+
+    emit(AuthStateLoggedIn());
+  }
+
+  void _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
+    emit(AuthRegistered(isLoading: true));
+
+    final result = await _authService.register(
+      event.email,
+      event.password,
     );
 
-    emit(AuthStateRegistered(id: id!));
+    if (result == null) {
+      emit(AuthStateError());
+      return;
+    }
+    emit(AuthStateSuccess());
+  }
+
+  void _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
+    emit(AuthStateLoggedOut(isLoading: true));
+
+    await _authService.logout();
+
+    emit(AuthStateLoggedOut());
   }
 }

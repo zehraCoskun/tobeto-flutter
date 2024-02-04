@@ -1,11 +1,37 @@
-abstract class AuthState {}
+abstract class AuthState {
+  final bool isLoading;
 
-class AuthStateInitialize extends AuthState {}
+  AuthState({
+    required this.isLoading,
+  });
+}
 
-class AuthStateRegistering extends AuthState {}
+class AuthStateLoggedIn extends AuthState {
+  AuthStateLoggedIn({
+    bool isLoading = false,
+  }) : super(isLoading: isLoading);
+}
 
-class AuthStateRegistered extends AuthState {
-  final String id;
+class AuthStateLoggedOut extends AuthState {
+  AuthStateLoggedOut({
+    bool isLoading = false,
+  }) : super(isLoading: isLoading);
+}
 
-  AuthStateRegistered({required this.id});
+class AuthRegistered extends AuthState {
+  AuthRegistered({
+    bool isLoading = false,
+  }) : super(isLoading: isLoading);
+}
+
+class AuthStateError extends AuthState {
+  AuthStateError({
+    bool isLoading = false,
+  }) : super(isLoading: isLoading);
+}
+
+class AuthStateSuccess extends AuthState {
+  AuthStateSuccess({
+    bool isLoading = false,
+  }) : super(isLoading: isLoading);
 }

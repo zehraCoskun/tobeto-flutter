@@ -89,6 +89,7 @@ class _LoginFormState extends State<LoginForm> {
               _formKey.currentState!.save();
               context.read<AuthBloc>().add(LoginEvent(email: emailController.text, password: passwordController.text));
             }
+            
           },
           child: const Text("Login"),
         ),

@@ -17,5 +17,7 @@ class UserService {
     return null;
   }
 
-  Future<void> update(UserUpdateRequest request) async {}
+  Future<void> update(UserUpdateRequest request) async {
+    
+  }
 }
